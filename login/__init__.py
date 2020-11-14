@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 db = SQLAlchemy(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site_users.db'
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site_users.db"
 app.secret_key = os.urandom(12)
 
 from login import routes, models

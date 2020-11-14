@@ -1,4 +1,3 @@
-from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from login import db
 
@@ -9,4 +8,4 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(120), unique=False, nullable=False)
 
     def __repr__(self) -> str:
-        return f'User {self.username}'
+        return f"User {self.username}"
