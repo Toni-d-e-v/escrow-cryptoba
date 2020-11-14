@@ -9,8 +9,7 @@ from login import app, db
 from login.models import User
 
 
-login_manager = LoginManager()
-login_manager.__init__(app)
+login_manager = LoginManager(app)
 login_manager.login_view = "login_page"
 
 

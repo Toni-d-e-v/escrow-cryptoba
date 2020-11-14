@@ -10,19 +10,11 @@ venv
 # Distribution
 .DS_Store
 .cache/
+*.db
 
 # python identifiers
 .python-version
 .pytest_cache/
-
-# mypy
-.mypy_cache
-
-# coverage
-.coverage
-
-# pytest
-assets/
 
 # pypi assets
 dist/
