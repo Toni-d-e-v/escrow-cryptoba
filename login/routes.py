@@ -13,9 +13,17 @@ login_manager = LoginManager(app)
 login_manager.login_view = "login_page"
 
 
+class HttpMethod:
+    GET: str = "GET"
+    POST: str = "POST"
+
+    @classmethod
+    def new_request(cls) -> tuple:
+        return cls.GET, cls.POST
+
+
 def add_user(username: str, password: str) -> None:
-    user = User(username=username, password=password)
-    db.session.add(user)
+    db.session.add(User(username=username, password=password))
     db.session.commit()
     flash("User is created")
 
@@ -32,9 +40,9 @@ def dashboard() -> str:
     return render_template("dashboard.html")
 
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/login", methods=HttpMethod.new_request())
 def login_page() -> str:
-    if request.method == "POST" and "username" in request.form:
+    if request.method == HttpMethod.POST and "username" in request.form:
         user = User.query.filter_by(
             username=request.form.get("username")
         ).first()
@@ -53,9 +61,9 @@ def logout_page() -> str:
     return redirect(url_for("index"))
 
 
-@app.route("/create_user", methods=["GET", "POST"])
+@app.route("/create_user", methods=HttpMethod.new_request())
 def create_user() -> str:
-    if request.method == "POST" and "username" in request.form:
+    if request.method == HttpMethod.POST and "username" in request.form:
         username = request.form.get("username")
         password = request.form.get("password")
         add_user(username, password)
