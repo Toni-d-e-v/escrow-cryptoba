@@ -58,7 +58,7 @@ login/site_users.db
 
 ### Meta
 
-Author – _Volodymyr Yahello_. Please check [AUTHORS](AUTHORS.md) file for all contributors.
+Author – _Volodymyr Yahello_. 
 
 Distributed under the `MIT` license. See [LICENSE](LICENSE.md) for more information.
 
