@@ -1,0 +1,30 @@
+
+{% extends 'base.html' %}
+
+{% block main %}
+<nav>
+  <ul>
+    <li> <a href="/">Crypto.ba Escrow</a></li>
+  </ul>
+  <ul>
+     <ul>
+       <li><a href="/dashboard">Dashboard</a></li>
+       <li><a href="/escrows">Escrows</a></li>
+       <li><a href="/create_escrow">Create</a></li>
+       <li><a href="/logout">Logout</a></li>
+        {% if session.admin %}
+           <li><a href="/admin">Admin</a></li>
+        {% endif %}
+  </ul>
+</nav>
+    <h1>Create Escrow</h1>
+    <article>
+        <form method="POST" action="/create_escrow">
+            <input type="number" name="amount" placeholder="USDT Amount"><br>
+            <button type="submit" value="Submit">Napravi</button>
+        </form>
+    </article>
+    <h5>
+      Prihvacate da vi imate USDT koji zelite da prodate, i da cete biti obavezni da posaljete USDT na racun Crypto.ba Escrow-a.
+    </h5>
+{% endblock %}

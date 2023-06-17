@@ -1,9 +1,45 @@
-<html>
+{% extends 'base.html' %}
+
+{% block main %}
    <head>
       <title>Dashboard</title>
    </head>
-
+   <nav>
+      <ul>
+        <li> <a href="/">Crypto.ba Escrow</a></li>
+      </ul>
+      <ul>
+         <ul>
+           <li><a href="/dashboard">Dashboard</a></li>
+           <li><a href="/escrows">Escrows</a></li>
+           <li><a href="/create_escrow">Create</a></li>
+           <li><a href="/logout">Logout</a></li>
+            {% if session.admin %}
+               <li><a href="/admin">Admin</a></li>
+            {% endif %}
+      </ul>
+  </nav>
    <body>
-      <h1>This is the Dashboard. You can only access this page once logged in</h1>
+      <h1>Dobrodosli {{ session.username }}</h1>
    </body>
-</html>
+   <!-- <a href="/escrows">Escrows</a>
+   <a href="/create_escrow">Create Escrow</a>
+   <a href="/logout">Logout</a> -->
+
+ 
+   <article>
+      <h3> Moji Podaci </h3>
+      USDT Tron addresa: {{ session.tron_address }}
+      <br>
+      USDT BSC addresa: {{ session.bep20_address }}
+      <br>
+      Telegram: {{ session.telegram_username}}
+      <br>
+      Email: {{ session.email }}
+      <br>
+      <a href="/postavke">Postavke</a>
+
+   </article>
+
+
+{% endblock %}

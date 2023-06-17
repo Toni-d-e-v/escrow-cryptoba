@@ -1,9 +1,67 @@
-<html>
-  <head>
-    <title>Home Page</title>
-  </head>
+{% extends 'base.html' %}
 
-  <body>
-    <h1>This is the home page  you do not need to be logged in.</h1>
-  </body>
-</html>
+{% block main %}
+<nav>
+  <ul>
+      <li><strong>Crypto.ba Escrow</strong></li>
+  </ul>
+  <ul>
+      <li>
+      <a href="/">Home</a>
+      </li>
+  </ul>
+
+  
+  {% if user.is_authenticated %}
+      <ul>
+          <li>
+          <a href="/dashboard">Dashboard</a>
+          </li>
+      </ul>
+      
+  {% endif %}
+  {% if not user.is_authenticated %}
+      <ul>
+          <li>
+          <a href="/login">Login</a>
+          </li>
+      </ul>
+      <ul>
+          <li>
+          <a href="/create_user">Register</a>
+          </li>
+      </ul>
+  {% endif %}
+  
+  </nav>
+<home class="home_page">
+    <h1>Crypto.ba Escrow Platform</h1>
+
+    <div class="grid">
+        <h3>60+ Zavrsenih Escrow-a na <a href="https://forum.crypto.ba/c/trgovina/prodajem/14">Crypto.ba Forum</a></h3>
+
+    </div>
+    <div class="grid">
+
+        <div class="article">
+            <h3>Simple</h3>
+            <h4>Samo USDT na Tron ili BSC mrezi</h4>
+        </div>
+        <div class="card">
+            <h3>Banka</h3>
+            <h4>
+            Admin cuva USDT dok prodavac ne potvrdi da je dobio novac.
+            </h4>
+        </div>
+        <div class="card">
+            <h3>Sigurno</h3>
+            <h4>
+            USDT se cuva na cold hardware walletu!
+            </h4>
+    </div>   
+  
+    </div>
+
+</home>
+
+  {% endblock %}

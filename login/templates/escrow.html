@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+{% block main %}
+   <head>
+      <title>Escrow</title>
+   </head>
+   <nav>
+    <ul>
+      <li> <a href="/">Crypto.ba Escrow</a></li>
+    </ul>
+    <ul>
+       <ul>
+         <li><a href="/dashboard">Dashboard</a></li>
+         <li><a href="/escrows">Escrows</a></li>
+         <li><a href="/create_escrow">Create</a></li>
+         <li><a href="/logout">Logout</a></li>
+          {% if session.admin %}
+             <li><a href="/admin">Admin</a></li>
+          {% endif %}
+    </ul>
+  </nav>
+
+   <p>
+        <article>
+            
+            
+        {{ escrow }}
+        <br>
+        {{ escrow.amount }}  USDT
+        <br>
+        Status: {{ escrow.status }}
+        <br>
+
+        {{ escrow.created_at }}
+        </article>
+        {% if escrow.status == "approved" %}
+            <article>
+                User: {{ user_buyer.username }} uzeo {{ escrow.amount }} USDT od {{ user_created.username }}
+
+            </article>
+        {% endif %}
+        {% if escrow.status == "rejected" %}
+            <article>
+                User: {{ user_buyer.username }} odbio escrow od {{ user_created.username }}
+            </article>
+        {% endif %}
+
+        {% if escrow.status == "accepted" %}
+            {% if escrow.verified == True %}
+                    <p style="color: green">
+                        Prodavac je poslao USDT na račun Crypto.ba
+                    </p>
+                    {% if escrow.created_by_user_id == session.id %}
+                        <article>
+                            <h4>
+                                Kupac {{ user_buyer.username }} je prihvatio escrow
+                            </h4>
+                            <br>
+
+                            <p>
+                                Kupac kontakt podaci:
+                                Telegram:
+                                {{
+                                    user_buyer.telegram_username
+                                }}
+                                <br>
+
+                                Email:
+                                {{
+                                    user_buyer.email
+                                }}
+                                <br>
+
+                                Kupac ce vas kontaktirati i poslati vam novac na racun.
+                            </p>
+
+                            <a href="/escrow_approve/{{ escrow.id }}">Uspjesno primio novac</a>
+                            <br>
+                            <a href="/escrow_reject/{{ escrow.id }}">Otkaži</a>
+                            <br>
+                        </article>
+
+                    {% endif %}
+                    {% if escrow.buyer_user_id == session.id %}
+                        <article>
+                            <h5>
+                                Prihvatio si escrow, sada treba da uplatiš novac na račun prodavača, 
+                                nakon što uplatiš novac, prodavač će potvrditi da je novac primljen i
+                                mi ćemo ti poslati USDT na tvoj račun.
+                            </h5>
+                            <p>
+                                Kontakt podaci prodavača: 
+                            </p>
+                            <br>
+
+                            Telegram: {{ user_created.telegram_username }}
+                            <br>
+
+                            Email: {{ user_created.email }}
+                            <br>
+                        </article>
+                    {% endif %}
+                {% else %} 
+                    {% if escrow.buyer_user_id == session.id %}
+                        <article>
+                            <div style="color: red;">
+                                <h4 style="color: red;">
+                                    Escrow nije verifikovan da je prodavac poslao USDT na račun Crypto.ba
+                                </h4>
+                                Molimo vas da pričekate dok se ne verifikuje, dobit ćete notifikaciju kada se verifikuje.
+                                <br>
+                            </div>
+                        </article>
+                    {% endif %}
+                    {% if escrow.created_by_user_id == session.id %}
+                        <article>
+                            <div>
+                                <h4>
+                                    Posaljite USDT na racun Crypto.ba te kontaktirajte admina
+                                </h4>
+                                <ul>
+                                    <li>
+                                        <p>
+                                            Tron: 0x..
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            BSC: 0x..
+                                        </p>
+                                    </li>
+
+                                </ul>
+                                <br>
+                                Telegram Admin: @CryptobaRux
+                            </div>
+                        </article>
+                    {% endif %}
+                {% endif %}
+        {% endif %}
+            {% if escrow.status == "created" %}
+                {% if escrow.created_by_user_id == session.id %}
+    
+                    <article>
+                        <h4>
+                            Cekamo da netko prihvati escrow
+                        </h4>
+                        <a href="/escrow_cancel/{{ escrow.id }}">Izbriši</a>
+                        <br>
+                    </article>
+                {% endif %}
+                {% if escrow.created_by_user_id != session.id %}
+                    <article>
+                        <h4>
+                            Prihvati escrow, te sljedi instrukcije
+                        </h4>
+                        <a href="/escrow_accept/{{ escrow.id }}">Prihvati</a>
+                        <br>
+                    </article>
+                {% endif %}
+            {% endif %}
+   </p>
+{% endblock %}

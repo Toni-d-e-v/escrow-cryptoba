@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block main %}
+   <head>
+      <title>Admin panel</title>
+    </head>
+    <a href="/dashboard">Dashboard</a>
+    Admin Panel
+    <div class="grid">
+        <div>
+            {% for escrow in escrows %}
+            <div>
+                <article>
+                    {{ escrow }}
+                    <br>
+                    {{ escrow.amount }}  
+                    <br>
+                    Status: {{ escrow.status }}
+                    <br>
+                    Created by: {{ escrow.created_by_user }}
+                    <br>
+                    Verifikacija: {{ escrow.verified }}
+                    <br>
+                    <a href="/escrow/{{ escrow.id }}">View</a>
+                    <a href="/escrow_verify/{{ escrow.id }}">Verify</a>
+                    <a href="/escrow_remove/{{ escrow.id }}">Remove</a>
+                </article>
+            </div>
+            {% endfor %}
+        </div>
+        <div>
+            {% for user in users %}
+            <div>
+                <article>
+                    {{ user }}
+                    <br>
+                    <a href="/user/{{ user.id }}">View</a>
+                </article>
+            </div>
+            {% endfor %}
+
+    </div>
+
+{% endblock %}

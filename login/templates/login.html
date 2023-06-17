@@ -1,18 +1,26 @@
-<html>
-   <head>
-      <title>Login Page</title>
-   </head>
+{% extends 'base.html' %}
+
+{% block main %}
 
    <body>
-      <h1>This is the page where users will login to the site</h1>
+      <nav>
+         <ul>
+           <li><strong>Crypto.Ba Escrow</strong></li>
+         </ul>
+         <ul>
+            <a href="/">Home</a>
+         </ul>
+      </nav>
+      <h1>Escrow</h1>
 
-      <div>
+      <article>
          <form method="POST">
             <label for="User login">Login</label><br>
             <input type="text" name="username" placeholder="Eg: Mike"><br>
             <input type="text" name="password" placeholder="Eg: secret-pass"><br>
-            <button type="submit" value="Submit">Submit</button>
+            <button type="submit" value="Submit">Login</button>
          </form>
-      </div>
-   </body>
-</html>
+         <a href="/create_user">Or register</a>
+      </article>
+
+{% endblock %}

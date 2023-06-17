@@ -1,27 +1,31 @@
-<html>
-   <head>
-      <title>Create User Page</title>
-      {% with messages = get_flashed_messages() %}
-         {% if messages %}
-         <ul class=flashes>
-         {% for message in messages %}
-            <li>{{ message }}</li>
-         {% endfor %}
-         </ul>
-         {% endif %}
-      {% endwith %}
-   <head>
+{% extends 'base.html' %}
+{% block main %}
 
-   <body>
-      <h1>This is a page where we can create a new user</h1>
+<nav>
+   <ul>
+     <li><strong>Crypto.Ba Escrow</strong></li>
+   </ul>
+   <ul>
+      <a href="/">Home</a>
+   </ul>
+</nav>
+<h1>Escrow</h1>
 
-      <div>
+      <article>
          <form method="POST" action="/create_user">
             <label for="User Creation">Create your User</label><br>
             <input type="text" name="username" placeholder="Eg: Mike"><br>
             <input type="text" name="password" placeholder="Eg: secret-pass"><br>
-            <button type="submit" value="Submit">Submit</button>
+            <input type="text" name="email" placeholder="Eg: mike@mke.net"><br>
+            <p>
+               Escrow
+            </p>
+            <input type="text" name="tron_address" placeholder="tron address"><br>
+            <input type="text" name="bep20_address" placeholder="bep20 address"><br>
+            <input type="text" name="telegram" placeholder="telegram username"><br>
+
+            <button type="submit" value="Submit">Register</button>
          </form>
-      </div>
-   </body>
-</html>
+         <a href="/login">Or login</a>
+      </article>
+{% endblock %}

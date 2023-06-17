@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block main %}
+   <head>
+      <title>ESCROWS</title>
+    </head>
+    <nav>
+      <ul>
+        <li> <a href="/">Crypto.ba Escrow</a></li>
+      </ul>
+      <ul>
+         <ul>
+           <li><a href="/dashboard">Dashboard</a></li>
+           <li><a href="/escrows">Escrows</a></li>
+           <li><a href="/create_escrow">Create</a></li>
+           <li><a href="/logout">Logout</a></li>
+            {% if session.admin %}
+               <li><a href="/admin">Admin</a></li>
+            {% endif %}
+      </ul>
+    </nav>
+    {% for escrow in escrows %}
+    <div>
+        <article>
+            {{ escrow }}
+            <br>
+            {{ escrow.amount }} USDT
+            <br>
+            Status: {{ escrow.status }}
+            <br>
+            Created by: {{ escrow.created_by_user }}
+            <a href="/escrow/{{ escrow.id }}">View</a>
+        </article>
+    </div>
+    {% endfor %}
+{% endblock %}
