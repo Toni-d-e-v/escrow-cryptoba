@@ -289,4 +289,4 @@ def new_email_a(id: int) -> str:
 def load_user(user_id: str):
     return User.query.get(int(user_id))
 
-app.run(host="127.0.0.1", port=5000, debug=True)
+app.run(host="127.0.0.1", port=80, debug=True)
